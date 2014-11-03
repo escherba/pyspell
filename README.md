@@ -15,7 +15,3 @@ Obviously [Norvig's script](http://norvig.com/spell-correct.html), which we're g
 
 * Start with Norvig's script, but provide additional word sets; specifically an American English one based on the (open) [American National Corpus](http://www.americannationalcorpus.org/) and the [Brown Corpus](http://www.hit.uib.no/icame/brown/bcm.html).
 * Incorporate in the `aspell` dictionaries as a fallback, creating a purely Python port of `aspell`.
-
-## Evaluation
-
-Performance will be measured by [quadratic weighted kappa](http://skll.readthedocs.org/en/latest/_modules/skll/metrics.html).
