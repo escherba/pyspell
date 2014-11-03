@@ -1,5 +1,6 @@
 import re
 from collections import defaultdict
+import bz2
 
 
 class BasicSpellCorrector(object):
@@ -8,8 +9,12 @@ class BasicSpellCorrector(object):
     '''
 
     def __init__(self, words_data_file):
-        with open(words_data_file, 'rU') as fh:
-            self.nwords = self.train(self.words(fh.read()))
+        if words_data_file.endswith("bz2"):
+            with bz2.BZ2File(words_data_file, 'r') as fh:
+                self.nwords = self.train(self.words(fh.read()))
+        else:
+            with open(words_data_file, 'rU') as fh:
+                self.nwords = self.train(self.words(fh.read()))
         
         self.alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -48,6 +53,6 @@ class BasicSpellCorrector(object):
 
 
 if __name__ == "__main__":
-    corrector = BasicSpellCorrector("../data/big.txt")
+    corrector = BasicSpellCorrector("../data/en_ANC.txt.bz2")
     print corrector.correct("halp")
     print corrector.correct("mom")
