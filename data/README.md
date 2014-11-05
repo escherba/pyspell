@@ -10,7 +10,7 @@ This is every plain-text file from the [Open American National Corpus](http://ww
 
 ## Testing and Evaluation Data
 
-The testing and evaluation data comes from the [Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml).  Not every sub-corpus is used here; the following are *excluded*:
+The testing and evaluation data comes from the [Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml).  Not every sub-corpus is used here; the following are **excluded**:
 
 * ASHFORD
 * CHES
@@ -23,7 +23,7 @@ The testing and evaluation data comes from the [Birkbeck spelling error corpus](
 * PETERS2
 * SAMPLE (since it is just the first 10 lines of every sub-corpus)
 
-This resulted in 12,533 unique word-error pairs, which was then filtered for *wrong-word* errors, as in, the error is actually a correctly-spelled word, but it is not the right word for this context.  While this is an interesting and important topic, it is beyond the scope of this project, especially since many wrong-word errors require a great deal of external knowledge, such as, according to this corpus, at least, knowing that in British English, one would say "a heavy __woolen__ coat", while in American English, "a heavy __wool__ coat".  A word-error pair was determined to be a wrong-word-error pair if the "error" was not flagged as an error by ``pyenchant`` (yeah, yeah), using the provided `en_US` and `en_GB` dictionaries.  3,488 word-error pairs were identified, or 27.8% of this subset of the Birkbeck corpus.  These can be found in `Birkbeck_subset_wrong_word_errors.csv`.
+This resulted in 12,533 unique word-error pairs, which was then filtered for **wrong-word** errors, as in, the error is actually a correctly-spelled word, but it is not the right word for this context.  While this is an interesting and important topic, it is beyond the scope of this project, especially since many wrong-word errors require a great deal of external knowledge.  For example, according to this corpus, at least, one would need to know that in British English, one would say "a heavy _woolen_ coat", while in American English, "a heavy _wool_ coat".  A word-error pair was determined to be a wrong-word-error pair if the "error" was not flagged as an error by ``pyenchant`` (yeah, yeah), using the provided `en_US` and `en_GB` dictionaries.  3,488 word-error pairs were identified, or 27.8% of this subset of the Birkbeck corpus.  These can be found in `Birkbeck_subset_wrong_word_errors.csv`.
 
 We were also interested in testing the claim that "80 to 95% of spelling errors are an edit distance of 1 from the target", and also Norvig's claim that, within his development set of 270 errors, this was only true for 76% of them.  Over this entire set of 9,045 word-error pairs, we computed the edit distance between each pair using [nltk](http://www.nltk.org/api/nltk.metrics.html#nltk.metrics.distance.edit_distance), the results of which are provided along with the testing and development sets here.  Here's a summary of what we learned:
 
