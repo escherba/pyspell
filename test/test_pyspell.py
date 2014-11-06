@@ -41,5 +41,7 @@ if __name__ == "__main__":
         sys.stderr.write("Usage: '-t' for testing data, '-d' for development data.\n")
         sys.exit(1)
 
-    for data_file in ["en_ANC.txt.bz2"]:
+    for data_file in ["en_ANC.txt.bz2", "big.txt"]:
+        print(data_file)
         evaluate(eval_data, "data/" + data_file)
+        print()
