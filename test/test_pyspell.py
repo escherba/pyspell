@@ -16,7 +16,7 @@ def evaluate(df, data_path):
     # error was corrected to something else
     false_negatives = df[df["correct form"] != df["correction from pyspell"]]
     false_negatives = false_negatives[false_negatives["correction from pyspell"] != false_negatives["error"]]
-    # error was corrected to itself
+    # error was corrected (or rather, not corrected at all) to itself
     false_positives = df[df["correction from pyspell"] == df["error"]]
 
     print("true positives = " + str(len(true_positives)))

@@ -16,3 +16,14 @@ Obviously [Norvig's script](http://norvig.com/spell-correct.html), which we're g
 * Start with Norvig's script, but provide additional word sets; specifically an American English one based on the (open) [American National Corpus](http://www.americannationalcorpus.org/) and the [Brown Corpus](http://www.hit.uib.no/icame/brown/bcm.html).
 * Incorporate in the `aspell` dictionaries as a fallback, creating a purely Python port of `aspell`.
 * Will work with >= 2.7 and 3.x.
+
+## Current Progress and Evaluation
+
+Currently, only Norvig's original proof-of-concept has been implemented (ok, copied, LOL) here, pretty much unmodified.  Also we are currently only evaluating two sets of training data: the original `big.txt` and the Open ANC.  See the `data/` directory for a description of these data sets, as well as a description of the development and testing sets.  The script `test/test_pyspell.py` will give you insight into how precision and recall are being computed.
+
+Currently, on the development set:
+
+|           | big.txt | en_ANC.txt.bz2 |
+|-----------|:-------:|:--------------:|
+| Precision |  76.14% |         77.37% |
+| Recall    |  61.52% |         63.38% |
