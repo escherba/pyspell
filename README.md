@@ -28,10 +28,10 @@ The script `test/test_pyspell.py` will give you insight into how precision and r
 
 Currently, on the development set:
 
-|                                             | Precision | Recall |
-|---------------------------------------------|:---------:|:------:|
-| Baseline (GNU aspell 0.60.6.1, `en` dict)*  |    88.82% | 87.26% |
-| `BasicSpellCorrector` with `big.txt`        |    76.14% | 61.52% |
-| `BasicSpellCorrector` with `en_ANC.txt.bz2` |    77.37% | 63.38% |
+|                                              | Precision | Recall |
+|----------------------------------------------|:---------:|:------:|
+| Baseline (GNU aspell 0.60.6.1, `en` dict)[1] |    88.82% | 87.26% |
+| `BasicSpellCorrector` with `big.txt`         |    76.14% | 61.52% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`  |    77.37% | 63.38% |
 
-* `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
+[1] `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
