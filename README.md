@@ -11,19 +11,25 @@ TL;DR: Ease of installation, and improvements on Norvig's work.
 
 Obviously [Norvig's script](http://norvig.com/spell-correct.html), which we're going to start with, was only meant as a proof-of-concept.  Problem is, it's actually pretty great, save for the supplied data, `big.txt`.  Norvig just copied and pasted in random works from [Project Gutenberg](https://www.gutenberg.org/), boiler-place licensing text and all, and augmented that with words from the [British National Corpus](http://www.natcorp.ox.ac.uk/).  As a result, we see weird (to an American) things happen, such as "mom" be corrected to "mon". :confused:
 
-## Goals
+## What's Here
 
-* Start with Norvig's script, but provide additional word sets; specifically an American English one based on the (open) [American National Corpus](http://www.americannationalcorpus.org/) and the [Brown Corpus](http://www.hit.uib.no/icame/brown/bcm.html).
+* A re-implementation (ok, copy, LOL) of Norvig's proof-of-concept, in `pyspell.norvig.BasicSpellCorrector` (a.k.a. `BasicSpellCorrector`).
+    - The training data sets are explained in the `data/README.md`, and evaluation results are provided, below.
+
+## Future Work
+
+* Expand `BasicSpellCorrector` with the work described in [Norvig's chapter in _Beautiful Data_](http://norvig.com/ngrams/).
 * Incorporate in the `aspell` dictionaries as a fallback, creating a purely Python port of `aspell`.
-* Will work with >= 2.7 and 3.x.
+* Ensure that this works with >= 2.7 and 3.x.
 
-## Current Progress and Evaluation
+## Evaluation
 
-Currently, only Norvig's original proof-of-concept has been implemented (ok, copied, LOL) here, pretty much unmodified.  Also we are currently only evaluating two sets of training data: the original `big.txt` and the Open ANC.  See the `data/` directory for a description of these data sets, as well as a description of the development and testing sets.  The script `test/test_pyspell.py` will give you insight into how precision and recall are being computed.
+The script `test/test_pyspell.py` will give you insight into how precision and recall are being computed.
 
 Currently, on the development set:
 
-|           | big.txt | en_ANC.txt.bz2 |
-|-----------|:-------:|:--------------:|
-| Precision |  76.14% |         77.37% |
-| Recall    |  61.52% |         63.38% |
+|                                             | Precision | Recall |
+|---------------------------------------------|:---------:|:------:|
+| Baseline (GNU aspell 0.60.6.1)              |           |        |
+| `BasicSpellCorrector` with `big.txt`        |    76.14% | 61.52% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2` |    77.37% | 63.38% |
