@@ -30,6 +30,8 @@ Currently, on the development set:
 
 |                                             | Precision | Recall |
 |---------------------------------------------|:---------:|:------:|
-| Baseline (GNU aspell 0.60.6.1)              |           |        |
+| Baseline (GNU aspell 0.60.6.1, `en` dict)*  |    88.82% | 87.26% |
 | `BasicSpellCorrector` with `big.txt`        |    76.14% | 61.52% |
 | `BasicSpellCorrector` with `en_ANC.txt.bz2` |    77.37% | 63.38% |
+
+* `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
