@@ -18,6 +18,8 @@ Obviously [Norvig's script](http://norvig.com/spell-correct.html), which we're g
 
 ## Future Work
 
+* Include additional development/testing data that contains pairs of errors and corrections that are the same, to verify that, when a correctly-spelled word is passed to `correct()` that same correctly-spelled word is returned.
+* Add an option to `correct()` that allows one to get back a list of the top _N_ suggestions, and evaluate this in the same way we've evaluated `aspell`.
 * Expand `BasicSpellCorrector` with the work described in [Norvig's chapter in _Beautiful Data_](http://norvig.com/ngrams/).
 * Incorporate in the `aspell` dictionaries as a fallback, creating a purely Python port of `aspell`.
 * Ensure that this works with >= 2.7 and 3.x.
