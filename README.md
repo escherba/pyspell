@@ -38,4 +38,5 @@ Currently, on the development set:
 | `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |    80.42% | 76.10% |
 
 [1] `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
+
 [2] Evaluation was done by asking `BasicSpellCorrector` to return the top 10 suggestions per error, or all of the suggestions, whichever was less.
