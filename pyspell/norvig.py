@@ -47,12 +47,20 @@ class BasicSpellCorrector(object):
         return set(w for w in words if w in self.nwords)
 
 
-    def correct(self, word):
+    def correct(self, word, suggestions=0):
         candidates = self.known([word]) or self.known(self.edits1(word)) or self.known_edits2(word) or [word]
+
+        if suggestions > 0:
+            if len(candidates) < suggestions:
+                # eek, some of these suggestions may not be actual words :(
+                return sorted(candidates, key=self.nwords.get, reverse=True)
+            else:
+                return sorted(candidates, key=self.nwords.get, reverse=True)[0:suggestions]
+
         return max(candidates, key=self.nwords.get)
 
 
 if __name__ == "__main__":
     corrector = BasicSpellCorrector("../data/en_ANC.txt.bz2")
-    print corrector.correct("halp")
+    print corrector.correct("halp", suggestions=10)
     print corrector.correct("mom")

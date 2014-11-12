@@ -13,13 +13,12 @@ Obviously [Norvig's script](http://norvig.com/spell-correct.html), which we're g
 
 ## What's Here
 
-* A re-implementation (ok, copy, LOL) of Norvig's proof-of-concept, in `pyspell.norvig.BasicSpellCorrector` (a.k.a. `BasicSpellCorrector`).
+* A re-implementation (ok, copy, LOL) of Norvig's proof-of-concept, in `pyspell.norvig.BasicSpellCorrector` (a.k.a. `BasicSpellCorrector`), with the abilty to return either the single best correction or the top _N_ suggestions (_N_ is user-specified).
     - The training data sets are explained in the `data/README.md`, and evaluation results are provided, below.
 
 ## Future Work
 
 * Include additional development/testing data that contains pairs of errors and corrections that are the same, to verify that, when a correctly-spelled word is passed to `correct()` that same correctly-spelled word is returned.
-* Add an option to `correct()` that allows one to get back a list of the top _N_ suggestions, and evaluate this in the same way we've evaluated `aspell`.
 * Expand `BasicSpellCorrector` with the work described in [Norvig's chapter in _Beautiful Data_](http://norvig.com/ngrams/).
 * Incorporate in the `aspell` dictionaries as a fallback, creating a purely Python port of `aspell`.
 * Ensure that this works with >= 2.7 and 3.x.
@@ -30,10 +29,13 @@ The script `test/test_pyspell.py` will give you insight into how precision and r
 
 Currently, on the development set:
 
-|                                              | Precision | Recall |
-|----------------------------------------------|:---------:|:------:|
-| Baseline (GNU aspell 0.60.6.1, `en` dict)[1] |    88.82% | 87.26% |
-| `BasicSpellCorrector` with `big.txt`         |    76.14% | 61.52% |
-| `BasicSpellCorrector` with `en_ANC.txt.bz2`  |    77.37% | 63.38% |
+|                                                                     | Precision | Recall |
+|---------------------------------------------------------------------|:---------:|:------:|
+| Baseline (GNU aspell 0.60.6.1, `en` dict) [1]                       |    88.82% | 87.26% |
+| `BasicSpellCorrector` with `big.txt`                                |    76.14% | 61.52% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`                         |    77.37% | 63.38% |
+| `BasicSpellCorrector` with `big.txt`, top 10 suggestions [2]        |    79.66% | 75.49% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |    80.42% | 76.10% |
 
 [1] `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
+[2] Evaluation was done by asking `BasicSpellCorrector` to return the top 10 suggestions per error, or all of the suggestions, whichever was less.
