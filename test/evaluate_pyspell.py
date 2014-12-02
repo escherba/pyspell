@@ -46,6 +46,19 @@ def evaluate(df, data_path, suggestions=0):
     print("recall = " + str(recall * 100))
 
 
+def assemble_test_data(path_to_Birkbeck_subset):
+    import urllib2
+    
+    df = pandas.io.parsers.read_csv(path_to_Birkbeck_subset, index_col="index")
+    tab0 = urllib2.urlopen("http://aspell.net/test/common-all/batch0.tab")
+    for line in tab0:
+        (error, correction) = line.strip().split("\t")
+        df = df.append({"error" : error, "correct form" : correction, "edit distance" : None},
+                       ignore_index=True)
+    print(str(len(df)) + " test cases.")
+    return df
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--evaluate_dev_set", action="store_true")
@@ -63,8 +76,7 @@ if __name__ == "__main__":
         eval_data = pandas.io.parsers.read_csv("data/Birkbeck_subset_spelling_errors_development_set.csv", 
                                                index_col="index")
     elif args.evaluate_test_set:
-        eval_data = pandas.io.parsers.read_csv("data/Birkbeck_subset_spelling_errors_testing_set.csv",
-                                               index_col="index")
+        eval_data = assemble_test_data("data/Birkbeck_subset_spelling_errors_testing_set.csv")
 
     for data_file in ["en_ANC.txt.bz2", "big.txt"]:
         print(data_file)
