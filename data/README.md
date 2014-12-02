@@ -10,7 +10,7 @@ This is every plain-text file from the [Open American National Corpus](http://ww
 
 ## Testing and Development Data
 
-We plan to use two testing sets: a portion of the [Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml) and the [Aspell testing data](http://aspell.net/test/common-all/batch0.tab).  For development, only the Birkbeck corpus will be used.
+For testing, we use two data sets: a portion of the [Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml) and the [Aspell testing data](http://aspell.net/test/common-all/batch0.tab).  For development, only the Birkbeck corpus is used.
 
 Here is how the testing and development subsets from the Birkbeck corpus were generated.  For starters, not every sub-corpus is used here; the following are **excluded**:
 
@@ -33,4 +33,4 @@ We were also interested in testing the claim that "80 to 95% of spelling errors 
 * median edit distance: 1
 * % of spelling errors that are an edit distance of 1 away from the target: 60.98%
 
-We then generated a random 60/40 split into development/testing, with `$ tail -n +2 Birkbeck_subset_spelling_errors_all.csv | shuf | split -l 5427`.  They can be found in `Birkbeck_subset_spelling_errors_development_set.csv` and `Birkbeck_subset_spelling_errors_testing_set.csv`, respectively.
+We then generated a random 60/40 split into development/testing, with `$ tail -n +2 Birkbeck_subset_spelling_errors_all.csv | shuf | split -l 5427`.  They can be found in `Birkbeck_subset_spelling_errors_development_set.csv` and `Birkbeck_subset_spelling_errors_testing_set.csv`, respectively.  Only 40% of the Birkbeck corpus is reserved for testing because Aspell's testing data provides an additional 4,206 test cases, for a total of 7,824 test cases and 5,427 development cases.
