@@ -10,7 +10,7 @@ This is every plain-text file from the [Open American National Corpus](http://ww
 
 ## Testing and Development Data
 
-We plan to use two testing sets: a portion of the [Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml) and the [Aspell testing data](http://aspell.net/test/cur/batch0.tab).  For development, only the Birkbeck corpus will be used.
+We plan to use two testing sets: a portion of the [Birkbeck spelling error corpus](http://ota.ox.ac.uk/headers/0643.xml) and the [Aspell testing data](http://aspell.net/test/common-all/batch0.tab).  For development, only the Birkbeck corpus will be used.
 
 Here is how the testing and development subsets from the Birkbeck corpus were generated.  For starters, not every sub-corpus is used here; the following are **excluded**:
 
