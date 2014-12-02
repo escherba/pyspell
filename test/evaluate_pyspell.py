@@ -55,7 +55,7 @@ def assemble_test_data(path_to_Birkbeck_subset):
         (error, correction) = line.strip().split("\t")
         df = df.append({"error" : error, "correct form" : correction, "edit distance" : None},
                        ignore_index=True)
-    print(str(len(df)) + " test cases.")
+    print(str(len(df)) + " test cases.\n")
     return df
 
 

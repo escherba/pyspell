@@ -27,7 +27,7 @@ Obviously [Norvig's script](http://norvig.com/spell-correct.html), which we're g
 
 The script `test/test_pyspell.py` will give you insight into how precision and recall are being computed.
 
-Currently, on the development set:
+<!--Currently, on the development set:
 
 |                                                                     | Precision | Recall |
 |---------------------------------------------------------------------|:---------:|:------:|
@@ -35,7 +35,17 @@ Currently, on the development set:
 | `BasicSpellCorrector` with `big.txt`                                |    76.14% | 61.52% |
 | `BasicSpellCorrector` with `en_ANC.txt.bz2`                         |    77.37% | 63.38% |
 | `BasicSpellCorrector` with `big.txt`, top 10 suggestions [2]        |    79.66% | 75.49% |
-| `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |    80.42% | 76.10% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |    80.42% | 76.10% |-->
+
+Currently, on the testing set:
+
+|                                                                     | Precision | Recall |
+|---------------------------------------------------------------------|:---------:|:------:|
+| Baseline (GNU aspell 0.60.6.1, `en` dict) [1]                       |    94.82% | 90.89% |
+| `BasicSpellCorrector` with `big.txt`                                |    80.21% | 68.05% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`                         |    85.62% | 72.50% |
+| `BasicSpellCorrector` with `big.txt`, top 10 suggestions [2]        |    82.68% | 80.18% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |    87.33% | 83.93% |
 
 [1] `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
 
