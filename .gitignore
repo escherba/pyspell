@@ -1,0 +1,12 @@
+*.py[cod]
+
+*.sw[op]
+
+*.egg-info/
+
+env/
+
+nosetests.xml
+.coverage
+cover/
+coverage.xml
