@@ -76,7 +76,7 @@ def parse_args(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--evaluate_dev_set", action="store_true")
     parser.add_argument("-t", "--evaluate_test_set", action="store_true")
-    parser.add_argument("-s", "--number_of_suggestions",
+    parser.add_argument("-s", "--number_of_suggestions", type=int,
                         help="Look in the top N suggested corrections for the right one.",
                         default=0)
     namespace = parser.parse_args(args)

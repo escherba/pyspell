@@ -39,13 +39,13 @@ The script `test/test_pyspell.py` will give you insight into how precision and r
 
 Currently, on the testing set:
 
-|                                                                     | Precision | Recall |
-|---------------------------------------------------------------------|:---------:|:------:|
-| Baseline (GNU aspell 0.60.6.1, `en` dict) [1]                       |    94.82% | 90.89% |
-| `BasicSpellCorrector` with `big.txt`                                |    80.21% | 68.05% |
-| `BasicSpellCorrector` with `en_ANC.txt.bz2`                         |    85.62% | 72.50% |
-| `BasicSpellCorrector` with `big.txt`, top 10 suggestions [2]        |    82.68% | 80.18% |
-| `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |    87.33% | 83.93% |
+|                                                                     | Recall  | Precision |
+|---------------------------------------------------------------------|:-------:|:---------:|
+| Baseline (GNU aspell 0.60.6.1, `en` dict) [1]                       |  94.82% |    90.89% |
+| `BasicSpellCorrector` with `big.txt`                                |  80.19% |    68.05% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`                         |  85.66% |    72.54% |
+| `BasicSpellCorrector` with `big.txt`, top 10 suggestions [2]        |  82.65% |    80.08% |
+| `BasicSpellCorrector` with `en_ANC.txt.bz2`, top 10 suggestions [2] |  87.36% |    83.92% |
 
 [1] `en` includes American, British, and Canadian English.  Also, since `aspell` returns multiple suggestions per error, if the desired correction is on the list of corrections, we count this as a true positive.
 

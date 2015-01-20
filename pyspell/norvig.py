@@ -2,8 +2,7 @@ import re
 import logging
 from itertools import chain
 from collections import Counter
-from pyspell.io import open_gz
-from pymaptools.io import read_text_resource
+from pyspell.io import open_gz, read_text_resource
 
 
 logging.basicConfig()
