@@ -3,6 +3,7 @@ import logging
 from itertools import chain
 from collections import Counter
 from pyspell.io import open_gz
+from pymaptools.io import read_text_resource
 
 
 logging.basicConfig()
@@ -11,7 +12,16 @@ LOG.setLevel(logging.DEBUG)
 
 
 ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
-ASCII_EN_PATTERN = re.compile(u'[a-z]+', re.UNICODE | re.IGNORECASE)
+ASCII_EN_PATTERN = re.compile(u'\\b[a-z]+\\b', re.UNICODE | re.IGNORECASE)
+REPLACE_MAP = {
+    # replace fancy single apostrophes
+    u"\u2018": u"'", u"\u2019": u"'", u"\u201a": u"'", u"\u201b": u"'", u"\u275b": u"'", u"\u275c": u"'",
+    # replace fancy double apostrophes
+    u"\u201c": u'"', u"\u201d": u'"', u"\u201e": u'"', u"\u201f": u'"', u"\u275d": u'"', u"\u275e": u'"',
+    # replace underscores with spaces
+    u"_": u" "
+}
+REPLACE_TRANSLATE = {ord(k): ord(v) for k, v in REPLACE_MAP.iteritems()}
 
 
 class BasicSpellCorrector(object):
@@ -23,11 +33,13 @@ class BasicSpellCorrector(object):
         self.word_pattern = pattern
         self.alphabet = alphabet
         with open_gz(words_data_file, 'r') as fh:
-            self.nwords = self.train(self.words(fh))
+            lines = read_text_resource(fh)
+            self.nwords = self.train(self.words(lines))
         self.word_value = self.create_key_lambda()
 
     def words(self, text):
         for line in text:
+            line = line.translate(REPLACE_TRANSLATE)
             for match in self.word_pattern.finditer(line):
                 yield match.group().lower()
 

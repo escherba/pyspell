@@ -53,8 +53,8 @@ def evaluate(df, data_path, suggestions=0):
     recall = true_positives / (true_positives + false_negatives)
     precision = true_positives / (true_positives + false_positives)
 
-    print("recall: {0:.1%}".format(recall))
-    print("precision: {0:.1%}".format(precision))
+    print("recall: {0:.2%}".format(recall))
+    print("precision: {0:.2%}".format(precision))
 
 
 def assemble_test_data(path_to_Birkbeck_subset):

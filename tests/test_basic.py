@@ -246,7 +246,7 @@ class TestBasic(unittest.TestCase):
 
     def test_suggestions(self):
         suggested = self.corrector.correct("halp", suggestions=10)
-        expected = ['help', 'half', 'hall', 'halt', 'hale', 'hal', 'harp', 'halo', 'hals', 'hap']
+        expected = ['help', 'half', 'hall', 'halt', 'hale', 'harp', 'hal', 'halo', 'hals', 'hap']
         self.assertListEqual(suggested, expected)
 
     def test_single(self):
