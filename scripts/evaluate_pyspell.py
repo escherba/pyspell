@@ -2,22 +2,20 @@ from __future__ import print_function, division
 
 import sys
 import argparse
-
 import pandas
-
 from pyspell import BasicSpellCorrector
 
 
 def evaluate(df, data_path, suggestions=0):
     pysp = BasicSpellCorrector(data_path)
-    df["correction from pyspell"] = df["error"].apply(lambda x : pysp.correct(x, suggestions=suggestions))
+    df["correction from pyspell"] = df["error"].apply(lambda x: pysp.correct(x, suggestions=suggestions))
 
     if suggestions > 0:
-        df["true positive"] = df.apply(lambda x : x["correct form"] in x["correction from pyspell"] and x["error"] not in x["correction from pyspell"],
+        df["true positive"] = df.apply(lambda x: x["correct form"] in x["correction from pyspell"] and x["error"] not in x["correction from pyspell"],
                                        axis=1)
-        df["false negative"] = df.apply(lambda x : x["correct form"] not in x["correction from pyspell"] and x["error"] not in x["correction from pyspell"],
+        df["false negative"] = df.apply(lambda x: x["correct form"] not in x["correction from pyspell"] and x["error"] not in x["correction from pyspell"],
                                         axis=1)
-        df["false positive"] = df.apply(lambda x : x["correct form"] not in x["correction from pyspell"] and x["error"] in x["correction from pyspell"],
+        df["false positive"] = df.apply(lambda x: x["correct form"] not in x["correction from pyspell"] and x["error"] in x["correction from pyspell"],
                                         axis=1)
 
         # suggested corrections contain the expected correction and not the error
@@ -48,32 +46,37 @@ def evaluate(df, data_path, suggestions=0):
 
 def assemble_test_data(path_to_Birkbeck_subset):
     import urllib2
-    
+
     df = pandas.io.parsers.read_csv(path_to_Birkbeck_subset, index_col="index")
     tab0 = urllib2.urlopen("http://aspell.net/test/common-all/batch0.tab")
     for line in tab0:
         (error, correction) = line.strip().split("\t")
-        df = df.append({"error" : error, "correct form" : correction, "edit distance" : None},
+        df = df.append({"error": error,
+                        "correct form": correction,
+                        "edit distance": None},
                        ignore_index=True)
     print(str(len(df)) + " test cases.\n")
     return df
 
 
-if __name__ == "__main__":
+def parse_args(args=None):
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--evaluate_dev_set", action="store_true")
     parser.add_argument("-t", "--evaluate_test_set", action="store_true")
-    parser.add_argument("-s", "--number_of_suggestions", 
+    parser.add_argument("-s", "--number_of_suggestions",
                         help="Look in the top N suggested corrections for the right one.",
                         default=0)
-    args = parser.parse_args()
+    namespace = parser.parse_args(args)
+    return namespace
 
+
+def run(args):
     if not(args.evaluate_dev_set or args.evaluate_test_set) or (args.evaluate_dev_set and args.evaluate_test_set):
         sys.stderr.write("Usage: '-t' for testing data, '-d' for development data.\n")
         sys.exit(1)
-        
+
     if args.evaluate_dev_set:
-        eval_data = pandas.io.parsers.read_csv("data/Birkbeck_subset_spelling_errors_development_set.csv", 
+        eval_data = pandas.io.parsers.read_csv("data/Birkbeck_subset_spelling_errors_development_set.csv",
                                                index_col="index")
     elif args.evaluate_test_set:
         eval_data = assemble_test_data("data/Birkbeck_subset_spelling_errors_testing_set.csv")
@@ -85,3 +88,7 @@ if __name__ == "__main__":
         else:
             evaluate(eval_data, "data/" + data_file)
         print()
+
+
+if __name__ == "__main__":
+    run(parse_args())
